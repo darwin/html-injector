@@ -187,7 +187,9 @@ module.exports["plugin"] = function (opts, bs) {
 
         debug('Responding to file change event', data.namespace);
 
-        requestNew(opts);
+        setTimeout(function() {
+          requestNew(opts)
+        }, 1000);
     }
 
     function pluginEvent () {
