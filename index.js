@@ -14,6 +14,7 @@ var createDom    = require("./lib/injector").createDom;
 var HtmlInjector = require("./lib/html-injector");
 var config       = require("./lib/config");
 var _            = require("./lodash.custom");
+const urlParser  = require('url');
 
 /**
  * ON/OFF flag
@@ -233,7 +234,14 @@ module.exports["plugin"] = function (opts, bs) {
                 return;
             }
 
-            if (!data || url.indexOf(data.path) !== -1) {
+            const parsedUrl = urlParser.parse(url);
+            var pathname = parsedUrl.pathname;
+            if (pathname === "/") {
+                pathname = "/index.html";
+            }
+            var datapath = data.path.substring(opts.prefix.length)
+
+            if (!data || pathname === datapath) {
                 
                 debug("requesting %s", url);
     
