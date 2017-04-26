@@ -240,8 +240,9 @@ module.exports["plugin"] = function (opts, bs) {
                 pathname = "/index.html";
             }
             var datapath = data.path.substring(opts.prefix.length)
+            var datapathWithoutExtension = datapath.substring(0, datapath.lastIndexOf('.'));
 
-            if (!data || pathname === datapath) {
+            if (!data || pathname === datapath || pathname === datapathWithoutExtension) {
                 
                 debug("requesting %s", url);
     
